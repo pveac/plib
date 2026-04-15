@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Enforces switch statement formatting.
  *
@@ -16,7 +17,6 @@ use PHP_CodeSniffer\Util\Tokens;
 
 class SwitchDeclarationSniff implements Sniff
 {
-
     /**
      * The number of spaces code should be indented.
      *
@@ -50,7 +50,8 @@ class SwitchDeclarationSniff implements Sniff
         $tokens = $phpcsFile->getTokens();
 
         // We can't process SWITCH statements unless we know where they start and end.
-        if (isset($tokens[$stackPtr]['scope_opener']) === false
+        if (
+            isset($tokens[$stackPtr]['scope_opener']) === false
             || isset($tokens[$stackPtr]['scope_closer']) === false
         ) {
             return;
@@ -91,7 +92,8 @@ class SwitchDeclarationSniff implements Sniff
                 }
             }
 
-            if ($type === 'Case'
+            if (
+                $type === 'Case'
                 && ($tokens[($nextCase + 1)]['type'] !== 'T_WHITESPACE'
                 || $tokens[($nextCase + 1)]['content'] !== ' ')
             ) {
@@ -125,7 +127,8 @@ class SwitchDeclarationSniff implements Sniff
 
                 if ($fix === true) {
                     $padding = str_repeat(' ', ($caseAlignment - 1));
-                    if ($tokens[$nextCase]['column'] === 1
+                    if (
+                        $tokens[$nextCase]['column'] === 1
                         || $tokens[($nextCase - 1)]['code'] !== T_WHITESPACE
                     ) {
                         $phpcsFile->fixer->addContentBefore($nextCase, $padding);
@@ -163,7 +166,8 @@ class SwitchDeclarationSniff implements Sniff
             }
 
             $nextBreak = $tokens[$nextCase]['scope_closer'];
-            if ($tokens[$nextBreak]['code'] === T_BREAK
+            if (
+                $tokens[$nextBreak]['code'] === T_BREAK
                 || $tokens[$nextBreak]['code'] === T_RETURN
                 || $tokens[$nextBreak]['code'] === T_CONTINUE
                 || $tokens[$nextBreak]['code'] === T_THROW
@@ -193,7 +197,8 @@ class SwitchDeclarationSniff implements Sniff
 
                         if ($fix === true) {
                             $padding = str_repeat(' ', ($caseAlignment - 1));
-                            if ($tokens[$nextBreak]['column'] === 1
+                            if (
+                                $tokens[$nextBreak]['column'] === 1
                                 || $tokens[($nextBreak - 1)]['code'] !== T_WHITESPACE
                             ) {
                                 $phpcsFile->fixer->addContentBefore($nextBreak, $padding);
@@ -220,7 +225,8 @@ class SwitchDeclarationSniff implements Sniff
                             break;
                         }
 
-                        if ($tokens[$nextRelevant]['code'] !== T_WHITESPACE
+                        if (
+                            $tokens[$nextRelevant]['code'] !== T_WHITESPACE
                             && $tokens[$nextBreak]['line'] !== $tokens[$nextRelevant]['line']
                         ) {
                             $nextLine = $tokens[$nextRelevant]['line'];
@@ -231,7 +237,8 @@ class SwitchDeclarationSniff implements Sniff
                     if ($type === 'Case') {
                         // Ensure the BREAK statement is followed by
                         // a single blank line, or the end switch brace.
-                        if ($nextLine !== ($tokens[$semicolon]['line'] + 2)
+                        if (
+                            $nextLine !== ($tokens[$semicolon]['line'] + 2)
                             && $nextRelevant !== $tokens[$stackPtr]['scope_closer']
                         ) {
                             $error = 'Case breaking statements must be followed by a single blank line';
@@ -292,7 +299,8 @@ class SwitchDeclarationSniff implements Sniff
                             break;
                         }
 
-                        if ($tokens[$i]['code'] !== T_WHITESPACE
+                        if (
+                            $tokens[$i]['code'] !== T_WHITESPACE
                             && $tokens[$opener]['line'] !== $tokens[$i]['line']
                         ) {
                             $nextLine = $tokens[$i]['line'];

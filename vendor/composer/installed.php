@@ -1,4 +1,6 @@
-<?php return array(
+<?php
+
+return array(
     'root' => array(
         'name' => 'name/plib',
         'pretty_version' => '1.0.0+no-version-set',
