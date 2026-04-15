@@ -1,0 +1,19 @@
+{
+    "name": "name/plib",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Name\\Plib\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Abashev Maksim",
+            "email": "pizdc72@gmail.com"
+        }
+    ],
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^4.0",
+        "phpstan/phpstan": "^2.1"
+    }
+}
